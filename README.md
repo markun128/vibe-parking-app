@@ -120,8 +120,22 @@ lib/
 ## 🔧 開発・ビルド
 
 ### 開発モード
+
+#### Web版
 ```bash
 flutter run -d web-server --web-port 8080
+```
+
+#### Android版（Docker エミュレータ）
+```bash
+# エミュレータ起動
+./scripts/run-android.sh
+
+# 別ターミナルでADB接続
+./scripts/connect-adb.sh
+
+# Flutterアプリ実行
+flutter run -d emulator-5554
 ```
 
 ### プロダクションビルド
@@ -140,6 +154,39 @@ flutter build ios
 ```bash
 flutter test
 ```
+
+## 🐳 Docker Android エミュレータ
+
+Dockerを使用してAndroidエミュレータを実行できます。
+
+### 前提条件
+- Docker
+- Docker Compose
+- KVM対応（Linux）
+
+### 使用方法
+
+1. **エミュレータ起動**
+```bash
+./scripts/run-android.sh
+```
+
+2. **ADB接続**（別ターミナルで）
+```bash
+./scripts/connect-adb.sh
+```
+
+3. **Flutterアプリ実行**
+```bash
+flutter run -d emulator-5554
+```
+
+### Docker構成
+- **ベースイメージ**: Ubuntu 22.04
+- **Android SDK**: 最新版
+- **Flutter**: 3.19.6
+- **エミュレータ**: Pixel 6 API 33
+- **仮想化**: KVM加速対応
 
 ## 📄 ライセンス
 

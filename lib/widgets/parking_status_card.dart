@@ -6,7 +6,6 @@ import '../providers/parking_provider.dart';
 import '../services/navigation_service.dart';
 import '../services/geocoding_service.dart';
 import '../theme/app_theme.dart';
-import 'nearby_parking_widget.dart';
 
 class ParkingStatusCard extends ConsumerStatefulWidget {
   final ParkingState parkingState;

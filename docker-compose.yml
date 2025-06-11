@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  android-emulator:
+    build: .
+    container_name: pmemo-android-emulator
+    privileged: true
+    volumes:
+      - .:/app
+      - android-sdk:/opt/android-sdk
+      - flutter-cache:/opt/flutter
+    ports:
+      - "5554:5554"  # ADB port
+      - "5555:5555"  # ADB port
+      - "8080:8080"  # Flutter web server
+    environment:
+      - DISPLAY=:99
+      - ANDROID_HOME=/opt/android-sdk
+      - FLUTTER_HOME=/opt/flutter
+    devices:
+      - /dev/kvm:/dev/kvm  # For hardware acceleration
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+volumes:
+  android-sdk:
+  flutter-cache:

@@ -1,0 +1,46 @@
+# Docker ignore file for Flutter project
+
+# Build outputs
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+flutter.log
+flutter_new.log
+
+# Local configuration
+.env
+.env.local
+
+# Git
+.git/
+.gitignore
+
+# Docker files (avoid recursive copying)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Large dependency directories
+node_modules/
+.pub-cache/
+
+# Test files
+test/
+coverage/
+
+# Documentation
+README.md
+docs/
