@@ -1,0 +1,60 @@
+name: pmemo
+description: "P-Memo - 世界で最も早く、簡単に、駐車した場所を記録・発見できるアプリ"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  
+  # State Management
+  flutter_riverpod: ^2.4.9
+  
+  # Location & Permission
+  geolocator: ^10.1.0
+  permission_handler: ^11.1.0
+  geocoding: ^2.1.1
+  
+  # Storage
+  shared_preferences: ^2.2.2
+  
+  # External Apps
+  url_launcher: ^6.2.2
+  
+  # HTTP requests
+  http: ^1.1.0
+  
+  # PRO Features
+  image_picker: ^1.0.4
+  flutter_local_notifications: ^16.3.0
+  
+  # Monetization
+  google_mobile_ads: ^4.0.0
+  in_app_purchase: ^3.1.11
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^3.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/
