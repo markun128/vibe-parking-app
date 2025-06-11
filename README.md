@@ -1,62 +1,164 @@
-# P-Memo - 駐車場記録アプリ
+# 🅿️ P-Memo - 駐車位置記録アプリ
 
-## Google Places API設定方法
+世界で最も早く、簡単に、駐車した場所を記録・発見できるFlutterアプリです。
 
-近くの駐車場機能を使用するには、Google Places APIキーの設定が必要です。
+## ✨ 主な機能
 
-### 1. Google Cloud Console でAPIキーを取得
+### 📍 位置情報機能
+- **現在地取得**: GPS/ブラウザ位置情報を使用してリアルタイム位置表示
+- **住所表示**: 緯度経度を読みやすい住所に自動変換
+- **位置精度表示**: 取得した位置情報の精度レベルを表示
 
-1. [Google Cloud Console](https://console.cloud.google.com/) にアクセス
-2. プロジェクトを作成または選択
-3. 「APIとサービス」→「認証情報」でAPIキーを作成
-4. Places API、Maps JavaScript API、Geocoding APIを有効化
+### 🚗 駐車管理機能
+- **ワンタップ記録**: 駐車位置を簡単に記録・保存
+- **駐車状態管理**: 現在の駐車状況をカードで分かりやすく表示
+- **駐車時間計測**: 駐車開始からの経過時間を自動計測
+- **履歴保存**: 過去の駐車記録を履歴として保存
 
-### 2. APIキーの設定
+### 🗺️ ナビゲーション機能
+- **Google Maps連携**: 記録した駐車位置へのナビゲーション
+- **距離・方角表示**: 現在地から駐車位置までの距離と方角を表示
 
-`lib/services/parking_search_service.dart` ファイルの12行目：
+### 🎨 ユーザーエクスペリエンス
+- **直感的UI**: シンプルで使いやすいマテリアルデザイン
+- **位置情報許可ガイド**: 初回使用時の分かりやすい説明
+- **エラーハンドリング**: 位置情報取得失敗時の適切な対応
+- **リフレッシュ機能**: 現在地情報の手動更新
 
-```dart
-static const String _placesApiKey = 'YOUR_GOOGLE_PLACES_API_KEY_HERE';
-```
+## 🚀 起動方法
 
-を以下のように変更：
+### 前提条件
+- Flutter SDK (3.19.6以上)
+- Dart SDK
+- Web ブラウザ（Chrome, Firefox, Safari等）
 
-```dart
-static const String _placesApiKey = 'あなたのAPIキー';
-```
+### 起動手順
 
-### 3. APIキーの制限設定（推奨）
-
-Google Cloud Consoleで以下の制限を設定することを推奨します：
-
-- **アプリケーションの制限**: HTTPリファラー
-- **API制限**: Places API、Maps JavaScript API、Geocoding API
-
-## 機能
-
-- 駐車位置の記録・管理
-- 現在地の住所表示
-- 半径1km以内の近くの駐車場検索
-- 駐車時間の自動計測
-- Google Mapsとの連携
-
-## 起動方法
-
+1. **リポジトリをクローン**
 ```bash
-flutter run -d web-server --web-port 8081
+git clone https://github.com/markun128/vibe-parking-app.git
+cd vibe-parking-app
 ```
 
-アプリは http://localhost:8081 でアクセスできます。
+2. **依存関係をインストール**
+```bash
+flutter pub get
+```
 
-## Getting Started
+3. **Webサーバーで起動**
+```bash
+flutter run -d web-server --web-port 8080
+```
 
-This project is a starting point for a Flutter application.
+4. **ブラウザでアクセス**
+```
+http://localhost:8080
+```
 
-A few resources to get you started if this is your first Flutter project:
+## 🌐 対応プラットフォーム
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- ✅ **Web**: Chrome, Firefox, Safari
+- ✅ **Android**: 5.0 (API level 21) 以上
+- ✅ **iOS**: 12.0 以上
+- ✅ **macOS**: 10.14 以上
+- ✅ **Windows**: 10 以上
+- ✅ **Linux**: Ubuntu 18.04 以上
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 使い方
+
+1. **アプリを開く**: ブラウザで http://localhost:8080 にアクセス
+2. **位置情報を許可**: ブラウザの位置情報許可ダイアログで「許可」を選択
+3. **現在地を確認**: 現在地カードで位置情報が取得されていることを確認
+4. **駐車位置を記録**: 「駐車位置を記録」ボタンをタップ
+5. **駐車完了**: 車を移動する際に「駐車完了」ボタンをタップ
+
+## 🛠️ 技術スタック
+
+### フロントエンド
+- **Flutter 3.19.6**: クロスプラットフォームUIフレームワーク
+- **Dart**: プログラミング言語
+- **Riverpod**: 状態管理
+- **Material Design**: UIデザインシステム
+
+### 位置情報サービス
+- **geolocator**: GPS位置情報取得
+- **geocoding**: 緯度経度と住所の相互変換
+- **permission_handler**: 位置情報権限管理
+
+### データ管理
+- **shared_preferences**: ローカルデータ保存
+- **flutter_riverpod**: リアクティブ状態管理
+
+### ナビゲーション
+- **url_launcher**: 外部アプリ（Google Maps）連携
+
+## 📂 プロジェクト構成
+
+```
+lib/
+├── main.dart                    # アプリエントリーポイント
+├── models/
+│   └── parking_location.dart   # 駐車位置データモデル
+├── providers/
+│   └── parking_provider.dart   # 駐車状態管理
+├── screens/
+│   ├── home_screen.dart        # メイン画面
+│   └── settings_screen.dart    # 設定画面
+├── services/
+│   ├── location_service.dart   # 位置情報サービス
+│   ├── geocoding_service.dart  # 住所変換サービス
+│   ├── navigation_service.dart # ナビゲーションサービス
+│   └── storage_service.dart    # データ保存サービス
+├── theme/
+│   └── app_theme.dart         # アプリテーマ設定
+└── widgets/
+    ├── action_buttons.dart     # アクションボタン
+    ├── ads_banner.dart        # 広告バナー
+    └── parking_status_card.dart # 駐車状態カード
+```
+
+## 🔧 開発・ビルド
+
+### 開発モード
+```bash
+flutter run -d web-server --web-port 8080
+```
+
+### プロダクションビルド
+```bash
+# Web用
+flutter build web
+
+# Android用
+flutter build apk
+
+# iOS用
+flutter build ios
+```
+
+### テスト実行
+```bash
+flutter test
+```
+
+## 📄 ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+
+## 🤝 コントリビューション
+
+プルリクエストやイシューの投稿を歓迎します！
+
+1. このリポジトリをフォーク
+2. 機能ブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを作成
+
+## 📞 サポート
+
+問題や質問がある場合は、[Issues](https://github.com/markun128/vibe-parking-app/issues)でお知らせください。
+
+---
+
+**P-Memo** - あなたの駐車体験を革新します 🚗✨
