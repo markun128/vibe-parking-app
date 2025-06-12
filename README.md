@@ -34,6 +34,8 @@
 
 ### 起動手順
 
+#### Linux/macOS
+
 1. **リポジトリをクローン**
 ```bash
 git clone https://github.com/markun128/vibe-parking-app.git
@@ -51,6 +53,29 @@ flutter run -d web-server --web-port 8080
 ```
 
 4. **ブラウザでアクセス**
+```
+http://localhost:8080
+```
+
+#### Windows
+
+1. **リポジトリをクローン**
+```cmd
+git clone https://github.com/markun128/vibe-parking-app.git
+cd vibe-parking-app
+```
+
+2. **環境セットアップ**
+```cmd
+scripts\setup-windows.bat
+```
+
+3. **Webアプリ起動**
+```cmd
+scripts\run-web-windows.bat
+```
+
+4. **ブラウザで自動的に開きます**
 ```
 http://localhost:8080
 ```
@@ -122,11 +147,20 @@ lib/
 ### 開発モード
 
 #### Web版
+
+**Linux/macOS:**
 ```bash
 flutter run -d web-server --web-port 8080
 ```
 
+**Windows:**
+```cmd
+scripts\run-web-windows.bat
+```
+
 #### Android版（Docker エミュレータ）
+
+**Linux/macOS:**
 ```bash
 # エミュレータ起動
 ./scripts/run-android.sh
@@ -135,6 +169,18 @@ flutter run -d web-server --web-port 8080
 ./scripts/connect-adb.sh
 
 # Flutterアプリ実行
+flutter run -d emulator-5554
+```
+
+**Windows:**
+```cmd
+REM エミュレータ起動
+scripts\run-android.bat
+
+REM 別コマンドプロンプトでADB接続
+scripts\connect-adb.bat
+
+REM Flutterアプリ実行
 flutter run -d emulator-5554
 ```
 
@@ -162,10 +208,11 @@ Dockerを使用してAndroidエミュレータを実行できます。
 ### 前提条件
 - Docker
 - Docker Compose
-- KVM対応（Linux）
+- KVM対応（Linux）/ Hyper-V対応（Windows）
 
 ### 使用方法
 
+#### Linux/macOS
 1. **エミュレータ起動**
 ```bash
 ./scripts/run-android.sh
@@ -178,6 +225,22 @@ Dockerを使用してAndroidエミュレータを実行できます。
 
 3. **Flutterアプリ実行**
 ```bash
+flutter run -d emulator-5554
+```
+
+#### Windows
+1. **エミュレータ起動**
+```cmd
+scripts\run-android.bat
+```
+
+2. **ADB接続**（別コマンドプロンプトで）
+```cmd
+scripts\connect-adb.bat
+```
+
+3. **Flutterアプリ実行**
+```cmd
 flutter run -d emulator-5554
 ```
 
