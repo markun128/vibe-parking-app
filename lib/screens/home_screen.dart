@@ -67,12 +67,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final showAdsAsync = ref.watch(showAdsProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: AppTheme.backgroundColor,
       appBar: AppBar(
-        title: const Text('🅿️ P-Memo'),
+        title: const Text('P-Memo'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings_outlined),
             onPressed: () => _navigateToSettings(context),
           ),
         ],
@@ -83,21 +83,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             // メインコンテンツエリア
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     // 駐車状態カード
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height * 0.4,
-                      ),
-                      child: ParkingStatusCard(
-                        parkingState: parkingState,
-                        onRefresh: () => _refreshParkingState(),
-                      ),
+                    ParkingStatusCard(
+                      parkingState: parkingState,
+                      onRefresh: () => _refreshParkingState(),
                     ),
                     
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 16),
                     
                     // アクションボタン
                     ActionButtons(
@@ -106,7 +101,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       onCompleteParkingSession: () => _completeParkingSession(),
                     ),
                     
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 16),
                     
                     
                     // 現在地情報表示
@@ -317,70 +312,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  // 現在地情報カードを構築
+  // 現在地情報カードを構築 - シンプル
   Widget _buildCurrentLocationCard() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-        border: Border.all(
-          color: AppTheme.primaryColor.withOpacity(0.2),
-          width: 1,
-        ),
-      ),
+      decoration: AppStyles.cardDecoration,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Icon(
-                Icons.my_location,
-                color: AppTheme.primaryColor,
+                Icons.location_on_outlined,
+                color: AppTheme.onSurfaceColor,
                 size: 20,
               ),
               const SizedBox(width: 8),
               Text(
                 '現在地',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppTheme.primaryColor,
-                  fontWeight: FontWeight.w600,
+                style: TextStyle(
+                  color: AppTheme.onSurfaceColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
                 ),
               ),
               const Spacer(),
               IconButton(
-                icon: const Icon(Icons.refresh, size: 18),
-                color: AppTheme.primaryColor,
+                icon: const Icon(Icons.refresh, size: 20),
+                color: AppTheme.onSurfaceColor,
                 onPressed: _getCurrentLocation,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
               ),
             ],
           ),
           const SizedBox(height: 8),
           if (_isLoadingLocation)
-            const Row(
+            Row(
               children: [
                 SizedBox(
                   width: 16,
                   height: 16,
-                  child: CircularProgressIndicator(strokeWidth: 2),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: AppTheme.primaryColor,
+                  ),
                 ),
-                SizedBox(width: 8),
-                Text('現在地を取得中...'),
+                const SizedBox(width: 8),
+                Text(
+                  '現在地を取得中...',
+                  style: TextStyle(
+                    color: AppTheme.onSurfaceColor,
+                    fontSize: 14,
+                  ),
+                ),
               ],
             )
           else
             Text(
-              _currentLocationAddress ?? 'タップして現在地を取得',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[700],
+              _currentLocationAddress ?? '現在地を取得',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 14,
               ),
             ),
         ],

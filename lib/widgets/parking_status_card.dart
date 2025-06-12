@@ -49,48 +49,28 @@ class _ParkingStatusCardState extends ConsumerState<ParkingStatusCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: AppStyles.cardDecoration.copyWith(
+        color: widget.parkingState.hasParking 
+            ? AppTheme.primaryColor.withOpacity(0.05)
+            : AppTheme.surfaceColor,
       ),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: widget.parkingState.hasParking
-              ? const LinearGradient(
-                  colors: [AppTheme.primaryColor, AppTheme.secondaryColor],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                )
-              : LinearGradient(
-                  colors: [
-                    Colors.grey.shade300,
-                    Colors.grey.shade400,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.parkingState.hasParking ? '駐車中' : '未駐車',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.5,
-                      color: widget.parkingState.hasParking 
-                          ? Colors.white 
-                          : Colors.grey.shade800,
-                      shadows: widget.parkingState.hasParking ? [
+              Text(
+                widget.parkingState.hasParking ? '駐車中' : '未駐車',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: widget.parkingState.hasParking 
+                      ? AppTheme.primaryColor 
+                      : AppTheme.onSurfaceColor,
                         const Shadow(
                           color: Colors.black26,
                           offset: Offset(0, 1),
