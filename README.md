@@ -59,10 +59,20 @@ http://localhost:8080
 
 #### Windows
 
-1. **リポジトリをクローン**
+**🚀 クイックスタート（推奨）:**
 ```cmd
 git clone https://github.com/markun128/vibe-parking-app.git
 cd vibe-parking-app
+scripts\run-web-portable.bat
+```
+※ Flutterが未インストールの場合、自動インストールオプションが表示されます
+
+**📖 詳細セットアップ:** [WINDOWS_SETUP.md](WINDOWS_SETUP.md) を参照
+
+**手動セットアップ:**
+1. **Flutter SDK インストール**
+```cmd
+scripts\install-flutter-windows.bat
 ```
 
 2. **環境セットアップ**
